@@ -17,10 +17,12 @@ class Node {
 
 class BinarySearchTree {
 
-   root() {
+   constructor() {
       this.root = null
    }
-
+   root() {
+      return this.root;
+   }
    add(value) {
       this.root = addWithin(this.root, value);
 
@@ -60,17 +62,24 @@ class BinarySearchTree {
       }
    }
 
-   find(cb) {
-      doLeft(this.root, cb);
+   find(value) {
+      return searchWithin(this.root, value);
 
-      function doLeft(node, cb) {
-         if (node) {
-            doLeft(node.left, cb);
-            cb(node.value);
-            doLeft(node.right, cb);
+      function searchWithin(node, value) {
+         if (!node) {
+            return null;
          }
+
+         if (node.value === value) {
+            return node;
+         }
+
+         return value < node.value ?
+            searchWithin(node.left, value) :
+            searchWithin(node.right, value);
       }
    }
+
 
    remove(value) {
       this.root = removeNode(this.root, value);
