@@ -25,20 +25,20 @@ const { NotImplementedError } = require('../extensions/index.js');
 function removeKFromList(l, k) {
 
    let node = l
-   let previous = null
+   let old = null
 
    while (l) {
       if (l.value === k) {
-         if (previous === null) {
+         if (old === null) {
             node = l = l.next
             continue
          } else {
-            previous.next = l.next
+            old.next = l.next
             l = l.next
             continue
          }
       }
-      previous = l
+      old = l
       l = l.next
    }
    return node
